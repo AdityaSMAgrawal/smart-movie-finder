@@ -1,0 +1,102 @@
+.cardGrid {
+  display: grid;
+  /* create 3 coloumns taking 1fraction of avaliable space */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* space b/w grid items = 16px */
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 30%, #232526 60%, #0f2027 100%);
+  position: relative;
+  z-index: 0;
+}
+
+/* Card container with perspective for 3D flip */
+.card {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 180px;
+  min-width: 240px;
+  border-radius: 20px;
+  transition: transform 0.2s;
+  box-shadow: 0 0 24px 4px #8e2de2aa, 0 0 48px 8px #00c3ff44;
+  position: relative;
+  background: transparent;
+}
+
+.card:hover {
+  transform: scale(1.04) rotateZ(-1deg);
+  box-shadow: 0 0 32px 8px #43e97baa, 0 0 64px 16px #8e2de244;
+}
+
+/* Card inner for flip animation */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner,
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Card faces */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #232526 60%, #8e2de2 100%);
+  color: #fff;
+  box-shadow: 0 0 12px 2px #8e2de2aa;
+  border: 3px solid transparent;
+  background-clip: padding-box, border-box;
+  z-index: 1;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #232526 60%, #8e2de2 100%);
+  border: 3px solid;
+  border-image: linear-gradient(90deg, #8e2de2, #4a00e0, #00c3ff, #43e97b) 1;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #0f2027 60%, #43e97b 100%);
+  color: #fff;
+  transform: rotateY(180deg);
+  border: 3px solid;
+  border-image: linear-gradient(90deg, #43e97b, #38f9d7, #8e2de2, #4a00e0) 1;
+  box-shadow: 0 0 24px 4px #43e97baa;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+/* Optional: subtle stars effect */
+.cardGrid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://svgshare.com/i/12vA.svg") repeat;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.selector-button {
+  background-color: red;
+  border-radius: 200px;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+}
